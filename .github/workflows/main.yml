@@ -1,5 +1,6 @@
 name: CI
 on:
+  - workflow_dispatch
   - push
   - pull_request
 permissions:
@@ -18,6 +19,11 @@ jobs:
           - ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+
+      - name: Garnet Runtime Visibility
+        uses: garnet-org/action@v2
+        with:
+          api_token: ${{ secrets.GARNET_API_TOKEN }}
       - uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
